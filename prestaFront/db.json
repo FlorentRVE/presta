@@ -1,0 +1,127 @@
+{
+  "providers": [
+    {
+      "id": "1",
+      "name": "John gito",
+      "email": "a@b.com",
+      "area": "West",
+      "job": "Developper",
+      "tel": "0588558",
+      "avatar": "https://www.picsum.photos/300/300?random=1"
+    },
+    {
+      "id": "2",
+      "name": "Mark Hammil",
+      "email": "m@h.com",
+      "area": "East",
+      "job": "Builder",
+      "tel": "0588558",
+      "avatar": "https://www.picsum.photos/300/300?random=2"
+    },
+    {
+      "id": "3",
+      "name": "Jean Grey",
+      "email": "j@g.com",
+      "area": "South",
+      "job": "Fighter",
+      "tel": "058855858",
+      "avatar": "https://www.picsum.photos/300/300?random=3"
+    },
+    {
+      "id": "4",
+      "name": "Victor Chevalier",
+      "email": "v@c.com",
+      "area": "West",
+      "job": "Barman",
+      "tel": "058855858",
+      "avatar": "https://www.picsum.photos/300/300?random=4"
+    },
+    {
+      "id": "5",
+      "name": "Miguel cabballerro",
+      "email": "m@c.com",
+      "area": "South",
+      "job": "Brawler",
+      "tel": "05885585858",
+      "avatar": "https://www.picsum.photos/300/300?random=5"
+    },
+    {
+      "id": "6",
+      "name": "Lee Chaolan",
+      "email": "l@c.com",
+      "area": "South",
+      "job": "Carpenter",
+      "tel": "058852758",
+      "avatar": "https://www.picsum.photos/300/300?random=6"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "1",
+      "name": "Developer"
+    },
+    {
+      "id": "2",
+      "name": "Carpenter"
+    },
+    {
+      "id": "3",
+      "name": "Brawler"
+    },
+    {
+      "id": "4",
+      "name": "Barman"
+    },
+    {
+      "id": "5",
+      "name": "Builder"
+    },
+    {
+      "id": "6",
+      "name": "Fighter"
+    },
+    {
+      "id": "7",
+      "name": "Architect"
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "name": "John gito",
+      "job": "Developper",
+      "area": "West",
+      "email": "a@b.com",
+      "password": "toto",
+      "isAdmin": false
+    },
+    {
+      "id": "938a",
+      "email": "register@gmail.com",
+      "password": "test",
+      "area": "East",
+      "job": "2"
+    },
+    {
+      "id": "b088",
+      "name": "ef",
+      "job": "All",
+      "area": "East",
+      "email": "fef@fefe.fr",
+      "password": "fef",
+      "isAdmin": false
+    },
+    {
+      "id": "4aa7",
+      "username": "regsiterDeux",
+      "job": "1",
+      "area": "North",
+      "email": "regsiterDeux@gmzol.fr",
+      "password": "regsiterDeux",
+      "confirmPassword": "regsiterDeux"
+    },
+    {
+      "id": "f484"
+    }
+  ]
+}
