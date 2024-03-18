@@ -1,13 +1,14 @@
-import { FaFile, FaKey } from "react-icons/fa";
-import { IoMail } from "react-icons/io5";
-import { IoMdAlert } from "react-icons/io";
+// ! (3) react form hook + zod - intégration du champs
 import * as api from "@utils/api";
 import { useContext, useState } from "react";
-import { ToastMessageContext, JobListContext } from "@/App";
 import { useCookies } from "react-cookie";
-import { MdDriveFileRenameOutline } from "react-icons/md";
-import { SignupSchema } from "@/models/SignupSchema";
-
+import { FaUser } from "react-icons/fa";
+import { IoKey, IoKeyOutline, IoMail } from "react-icons/io5";
+import { ToastMessageContext, JobListContext } from "@/App";
+import FormField from "./FormField";
+import { FormData, SignupSchema } from "@/models/formType/SignUpType";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function SignUpForm() {
   const [, setCookie] = useCookies(["token"]);
@@ -15,28 +16,19 @@ function SignUpForm() {
   const { setToastMessage } = useContext(ToastMessageContext);
   const [errorMessage, setErrorMessage] = useState("");
   const { jobList } = useContext(JobListContext);
-  const areaList = ["North", "East", "South", "West"];
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const email = event.currentTarget.email.value;
-    const password = event.currentTarget.password.value;
-    const username = event.currentTarget.username.value;
-    const area = event.currentTarget.area.value;
-    const job = event.currentTarget.job.value;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(SignupSchema),
+  });
 
-    const formData = SignupSchema.safeParse({
-      email,
-      username,
-      area,
-      job,
-      password,
-      confirmPassword: password,
-    });
+  const onSubmit = async (data: FormData) => {
+    // event.preventDefault();
 
-    console.log(formData.success, formData);
-
-    const { response, token, message } = await api.register(formData);
+    const { response, token, message } = await api.register(data);
 
     if (response) {
       setCookie("token", token);
@@ -56,102 +48,71 @@ function SignUpForm() {
     }
   };
 
-  const alert = false;
   return (
     <>
       <form
         className="form-control gap-5"
-        onSubmit={handleSubmit}
+        onSubmit={handleSubmit(onSubmit)}
         method="dialog"
       >
-        <label className="input input-bordered flex items-center gap-2">
-          <MdDriveFileRenameOutline />
-          <input
-            type="text"
-            name="username"
-            className="grow"
-            placeholder="username"
-            required
-          />
-        </label>
+        <FormField
+          type="text"
+          placeholder="Username"
+          name="username"
+          register={register}
+          error={errors.username}
+          icon={<FaUser />}
+        />
 
-        <label className="">
-          <select className="select select-bordered w-full" name="job">
-            <option disabled selected>
-              Job
-            </option>
-            <option>All</option>
-            {jobList.map((job) => (
-              <option key={job.id} value={job.id}>
-                {job.name}
-              </option>
-            ))}
-          </select>
-        </label>
+        <FormField
+          type="select"
+          placeholder="Job"
+          name="job"
+          register={register}
+          error={errors.job}
+          options={jobList.map((job) => ({ name: job.name, value: job.id }))}
+        />
 
-        <label className="">
-          <select className="select select-bordered w-full" name="area">
-            <option disabled selected>
-              Area
-            </option>
-            <option>All</option>
-            {areaList.map((area, index) => (
-              <option key={index} value={area}>
-                {area}
-              </option>
-            ))}
-          </select>
-        </label>
+        <FormField
+          type="select"
+          placeholder="Area"
+          name="area"
+          register={register}
+          error={errors.area}
+          options={["Nord", "Sud", "Est", "Ouest"].map((area) => ({
+            name: area,
+            value: area,
+          }))}
+        />
 
-        <label className="input input-bordered flex items-center gap-2">
-          <IoMail />
-          <input
-            type="email"
-            name="email"
-            className="grow"
-            placeholder="Email"
-            required
-          />
-        </label>
+        <FormField
+          type="email"
+          placeholder="Email"
+          name="email"
+          register={register}
+          error={errors.email}
+          icon={<IoMail />}
+        />
 
-        <label className="input input-bordered flex items-center gap-2">
-          <FaKey />
-          <input
-            type="password"
-            name="password"
-            className="grow"
-            placeholder="Password"
-            required
-          />
-        </label>
+        <FormField
+          type="password"
+          placeholder="Password"
+          name="password"
+          register={register}
+          error={errors.password}
+          icon={<IoKey />}
+        />
 
-        <label className="input input-bordered flex items-center gap-2">
-          <FaKey />
-          <input
-            type="password"
-            name="passwordConfirmation"
-            className="grow"
-            placeholder="Password confirmation"
-            required
-          />
-        </label>
+        <FormField
+          type="password"
+          placeholder="Confirm Password"
+          name="confirmPassword"
+          register={register}
+          error={errors.confirmPassword}
+          icon={<IoKeyOutline />}
+        />
 
-        <label className="input input-bordered flex items-center gap-2">
-          <FaFile />
-          <input
-            type="file"
-            name="file"
-            className="grow"
-            // required
-          />
-        </label>
-
-        {alert ? (
-          <div role="alert" className="alert alert-error">
-            <IoMdAlert />
-            <span>Error! Task failed successfully.</span>
-          </div>
-        ) : null}
+        <input type="file" name="file" className="grow" />
 
         <button type="submit" className="btn btn-primary w-1/2 self-end">
           Sign Up

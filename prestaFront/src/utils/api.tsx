@@ -25,7 +25,7 @@ export const login = async (email: string, password: string) => {
 }
 export const register = async (formData: object) => {
   //! TODO UPDATE REGISTER WITH BACKEND
-  const bodyContent = JSON.stringify(formData.data);
+  const bodyContent = JSON.stringify(formData);
 
   await fetch(API_USER_URL, {
     method: "POST",

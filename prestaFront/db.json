@@ -94,34 +94,6 @@
       "email": "a@b.com",
       "password": "toto",
       "isAdmin": false
-    },
-    {
-      "id": "938a",
-      "email": "register@gmail.com",
-      "password": "test",
-      "area": "East",
-      "job": "2"
-    },
-    {
-      "id": "b088",
-      "name": "ef",
-      "job": "All",
-      "area": "East",
-      "email": "fef@fefe.fr",
-      "password": "fef",
-      "isAdmin": false
-    },
-    {
-      "id": "4aa7",
-      "username": "regsiterDeux",
-      "job": "1",
-      "area": "North",
-      "email": "regsiterDeux@gmzol.fr",
-      "password": "regsiterDeux",
-      "confirmPassword": "regsiterDeux"
-    },
-    {
-      "id": "f484"
     }
   ]
 }
